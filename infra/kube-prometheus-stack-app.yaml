@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: kube-prometheus-stack
+    helm:
+      valuesObject:
+        alertmanager:
+          alertmanagerSpec:
+            retention: 48h
+            storage:
+              volumeClaimTemplate:
+                spec:
+                  resources:
+                    requests:
+                      storage: 100Mi
+
+        prometheus:
+          prometheusSpec:
+            externalLabels:
+              cluster: workshop
+            storageSpec:
+              volumeClaimTemplate:
+                spec:
+                  resources:
+                    requests:
+                      storage: 2Gi
+
+        grafana:
+          adminPasswordSecret:
+            name: "monitoring/grafana-admin-credentials"
+            key: admin-password
+          persistence:
+            type: pvc
+            enabled: true
+            size: 100Mi
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            hosts:
+              - grafana.65.109.1.126.nip.io
+
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: 66.1.1
