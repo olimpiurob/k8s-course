@@ -8,3 +8,4 @@ resources:
   - promtail-app.yaml
   - kubernetes-event-exporter-app.yaml
   - kubelet-csr-approver-app.yaml
+  - cert-manager-app.yaml
