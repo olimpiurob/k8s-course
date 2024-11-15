@@ -12,4 +12,4 @@ resources:
   - kubelet-csr-approver-app.yaml
   - cert-manager-app.yaml
   - kube-prometheus-stack-app.yaml
-  - loki-stack-app.yaml
+  - loki-app.yaml
