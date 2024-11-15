@@ -12,10 +12,6 @@ spec:
     chart: loki
     helm:
       valuesObject:
-        gateway:
-          nginxConfig:
-            custom: |
-              listen 8080;
         loki:
           auth_enabled: false
           commonConfig:
@@ -90,3 +86,11 @@ spec:
           enabled: false
     repoURL: https://grafana.github.io/helm-charts
     targetRevision: 6.19.0
+  # Need to ignore the gateway configmap from the helm chart due to the IPv6 binding causing issues
+  ignoreDifferences:
+    - group: ""
+      kind: ConfigMap
+      name: loki-gateway
+      namespace: logging
+      jsonPointers:
+        - /data
