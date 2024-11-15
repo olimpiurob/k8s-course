@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubelet-csr-approver
+  namespace: argocd
+spec:
+  destination:
+    namespace: kube-system
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: kubelet-csr-approver
+    helm:
+      valuesObject:
+        bypassDnsResolution: true
+        metrics:
+          enable: false
+    repoURL: https://postfinance.github.io/kubelet-csr-approver
+    targetRevision: 1.2.3
