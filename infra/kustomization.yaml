@@ -6,3 +6,4 @@ resources:
   - sealed-secrets-app.yaml
   - rook-ceph-app.yaml
   - promtail-app.yaml
+  - kubernetes-event-exporter-app.yaml
