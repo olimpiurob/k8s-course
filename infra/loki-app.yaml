@@ -12,6 +12,10 @@ spec:
     chart: loki
     helm:
       valuesObject:
+        gateway:
+          nginxConfig:
+            custom: |
+              listen 8080;
         loki:
           auth_enabled: false
           commonConfig:
