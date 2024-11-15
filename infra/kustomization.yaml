@@ -5,3 +5,4 @@ resources:
   - ingress-nginx-app.yaml
   - sealed-secrets-app.yaml
   - rook-ceph-app.yaml
+  - promtail-app.yaml
